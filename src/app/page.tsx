@@ -1,11 +1,17 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { fetchTrips } from '../services/tripService';
+import Navbar from '../components/Navbar';
+import TitleBlock from '../components/TitleBlock';
+import TripList from '../components/TripList';
 
 interface Trip {
   id: number;
   title: string;
   details: string;
   thumbnail: string;
+  completed: boolean;
 }
 
 export default function Home() {
@@ -33,16 +39,9 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Travel Dreams</h1>
-      <ul>
-        {trips.map(trip => (
-          <li key={trip.id}>
-            <h2>{trip.title}</h2>
-            <p>{trip.details}</p>
-            <img src={trip.thumbnail} alt={trip.title} />
-          </li>
-        ))}
-      </ul>
+      <Navbar />
+      <TitleBlock />
+      <TripList trips={trips} />
     </div>
   );
 }
