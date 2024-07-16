@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { fetchTrips } from '../services/tripService';
-import Navbar from '../components/Navbar';
-import TitleBlock from '../components/TitleBlock';
-import TripList from '../components/TripList';
+import { useEffect, useState } from "react";
+import { fetchTrips } from "../services/tripService";
+import Navbar from "../components/Navbar";
+import TitleBlock from "../components/TitleBlock";
+import TripList from "../components/TripList";
 
 interface Trip {
   id: number;
@@ -25,7 +25,7 @@ export default function Home() {
         const data = await fetchTrips();
         setTrips(data);
       } catch (error) {
-        setError('Error fetching trips');
+        setError("Error fetching trips");
       } finally {
         setLoading(false);
       }
@@ -38,10 +38,10 @@ export default function Home() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
+    <>
       <Navbar />
       <TitleBlock />
       <TripList trips={trips} />
-    </div>
+    </>
   );
 }

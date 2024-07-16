@@ -1,0 +1,127 @@
+.tripCard {
+  display: flex;
+  border: 1px solid #d8d8d8;
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 5 / 1;
+}
+
+.imageContainer {
+  width: 50%;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tripInfo {
+  width: 50%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.primaryButton,
+.dangerButton {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.primaryButton:hover,
+.dangerButton:hover {
+  text-decoration: none;
+}
+
+.dangerButton {
+  color: #c93957;
+}
+
+@media (max-width: 1440px) {
+  .tripCard {
+    aspect-ratio: 4 / 1;
+  }
+}
+
+@media (max-width: 1280px) {
+  .tripCard {
+    aspect-ratio: 3 / 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tripCard {
+    aspect-ratio: unset;
+    height: auto;
+  }
+
+  .imageContainer,
+  .tripInfo {
+    width: 100%;
+  }
+
+  .tripInfo {
+    padding: 1rem;
+  }
+
+  .buttons div {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tripCard {
+    flex-direction: column;
+    aspect-ratio: unset;
+    height: auto;
+  }
+
+  .imageContainer,
+  .tripInfo {
+    width: 100%;
+  }
+
+  .tripInfo {
+    padding: 1rem;
+  }
+
+  .imageContainer {
+    height: 16rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tripInfo {
+    padding: 0.5rem;
+  }
+
+  .imageContainer {
+    height: 12rem;
+  }
+}

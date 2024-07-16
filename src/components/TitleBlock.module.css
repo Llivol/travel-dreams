@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.title {
+  display: inherit;
+  flex-direction: inherit;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  border-radius: 6.25rem;
+  padding: 0.38rem 0.38rem 0.38rem 1rem;
+}
+
+.input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 6.25rem;
+}
+
+.searchButton {
+  border: 1px solid #d8d8d8;
+  background-color: var(--foreground-color);
+  color: var(--background-color);
+  border-radius: 6.25rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
