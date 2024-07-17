@@ -20,11 +20,11 @@
 }
 
 .toggleButton:hover {
-  background-color: #d8d8d8;
+  background-color: #F3F3F3;
 }
 
 .toggleButton.active {
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
 }
 
 .toggleButton:first-child {

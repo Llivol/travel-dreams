@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className={styles.logo}>
         <img src="/logo.svg" alt="Travel Dreams Logo" />
       </div>
-      <button className={styles.createButton}>Create New Trip</button>
+      <button disabled className={styles.createButton}>Create New Trip</button>
     </nav>
   );
 };

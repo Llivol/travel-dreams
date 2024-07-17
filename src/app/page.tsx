@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchTrips } from "../services/tripService";
+import { fetchTrips, deleteTrip } from '../services/tripService';
 import Navbar from "../components/Navbar";
 import TitleBlock from "../components/TitleBlock";
 import TripList from "../components/TripList";
@@ -39,6 +39,16 @@ export default function Home() {
     setSearchTerm(term);
   };
 
+  const handleDelete = async (tripId: number) => {
+    try {
+      await deleteTrip(tripId);
+      const updatedTrips = trips.filter((trip) => trip.id !== tripId);
+      setTrips(updatedTrips);
+    } catch (error) {
+      console.error('Error deleting trip:', error);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -46,7 +56,7 @@ export default function Home() {
     <>
       <Navbar />
       <TitleBlock onSearch={handleSearch} />
-      <TripList trips={trips} searchTerm={searchTerm} />
+      <TripList trips={trips} searchTerm={searchTerm} onDelete={handleDelete} />
     </>
   );
 }

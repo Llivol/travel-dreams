@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./TripCard.module.css";
+import Modal from "./Modal";
 
 interface Trip {
   id: number;
@@ -10,13 +11,35 @@ interface Trip {
   itinerary: Array<{ day: string; activities: string[] }>;
 }
 
+
 interface TripCardProps {
+  key: number;
   trip: Trip;
+  onDelete: (tripId: number) => void;
 }
 
-const TripCard: React.FC<TripCardProps> = ({ trip }) => {
+const TripCard: React.FC<TripCardProps> = ({ key, trip, onDelete }) => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowConfirmModal(true);
+  };
+
+  const handleDeleteConfirmationClick = () => {
+    onDelete(trip.id);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDeleteConfirmationClick();
+    setShowConfirmModal(false);
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirmModal(false);
+  };
+
   return (
-    <div className={styles.tripCard}>
+    <div key={key} className={styles.tripCard}>
       <div className={styles.imageContainer}>
         <img src={trip.photo_url} alt={trip.title} className={styles.image} />
       </div>
@@ -29,10 +52,31 @@ const TripCard: React.FC<TripCardProps> = ({ trip }) => {
           </div>
           <div>
             <button className={styles.primaryButton}>Edit</button>
-            <button className={styles.dangerButton}>Delete</button>
+            <button className={styles.dangerButton} onClick={handleDeleteClick}>
+              Delete
+            </button>
           </div>
         </div>
       </div>
+      {showConfirmModal && (
+        <Modal>
+          <p>Are you sure you want to delete this trip?</p>
+          <div>
+            <button
+              className={styles.primaryButton}
+              onClick={handleConfirmDelete}
+            >
+              Confirm
+            </button>
+            <button
+              className={styles.dangerButton}
+              onClick={handleCancelDelete}
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };
