@@ -18,6 +18,7 @@ export default function Home() {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getTrips = async () => {
@@ -34,14 +35,18 @@ export default function Home() {
     getTrips();
   }, []);
 
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <>
       <Navbar />
-      <TitleBlock />
-      <TripList trips={trips} />
+      <TitleBlock onSearch={handleSearch} />
+      <TripList trips={trips} searchTerm={searchTerm} />
     </>
   );
 }

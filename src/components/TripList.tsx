@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TripCard from "./TripCard"; // Import your TripCard component
-import styles from "./TripList.module.css"; // Import your module styles here
+import TripCard from "./TripCard";
+import styles from "./TripList.module.css";
 
 interface Trip {
   id: number;
@@ -13,16 +13,23 @@ interface Trip {
 
 interface TripListProps {
   trips: Trip[];
+  searchTerm: string;
 }
 
-const TripList: React.FC<TripListProps> = ({ trips }) => {
+const TripList: React.FC<TripListProps> = ({ trips, searchTerm }) => {
   const [filter, setFilter] = useState("All");
 
   const filteredTrips = trips.filter((trip) => {
-    if (filter === "All") return true;
-    if (filter === "Upcoming") return trip.status === "todo";
-    if (filter === "Completed") return trip.status === "done";
-    return true;
+    const matchesFilter =
+      filter === "All" ||
+      (filter === "Upcoming" && trip.status === "todo") ||
+      (filter === "Completed" && trip.status === "done");
+
+    const matchesSearch =
+      trip.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      trip.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesFilter && matchesSearch;
   });
 
   const handleFilterChange = (filterType: string) => {
