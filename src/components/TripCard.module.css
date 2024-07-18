@@ -26,27 +26,25 @@
   overflow-y: auto;
 }
 
-.buttons {
+.buttonContainer {
   display: flex;
   justify-content: space-between;
 }
 
-.buttons div {
+.buttonContainer div {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.primaryButton,
-.dangerButton {
+.buttonContainer div button {
   border: none;
   background: none;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.primaryButton:hover,
-.dangerButton:hover {
+.buttonContainer div button:hover {
   text-decoration: none;
 }
 

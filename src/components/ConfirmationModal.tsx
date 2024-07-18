@@ -3,15 +3,21 @@ import styles from "./ConfirmationModal.module.css";
 
 interface ConfirmationModalProps {
   message: string;
+  confirmBtnText: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ message, onConfirm, onCancel }) => {
+const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
+  message,
+  confirmBtnText,
+  onConfirm,
+  onCancel,
+}) => {
   React.useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, []);
 
@@ -21,11 +27,9 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ message, onConfir
         <h5>{message}</h5>
         <div className={styles.buttonContainer}>
           <button className={styles.dangerButton} onClick={onConfirm}>
-            Delete
+            {confirmBtnText}
           </button>
-          <button onClick={onCancel}>
-            Cancel
-          </button>
+          <button onClick={onCancel}>Cancel</button>
         </div>
       </div>
     </div>

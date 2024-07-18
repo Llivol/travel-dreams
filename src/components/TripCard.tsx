@@ -51,12 +51,12 @@ const TripCard: React.FC<TripCardProps> = ({ key, trip, onDelete, onMarkComplete
       <div className={styles.tripInfo}>
         <h2>{trip.title}</h2>
         <p>{trip.description}</p>
-        <div className={styles.buttons}>
+        <div className={styles.buttonContainer}>
           <div>
-            <button className={styles.primaryButton} onClick={handleOpenDetailsModal}>See Trip Details</button>
+            <button onClick={handleOpenDetailsModal}>See Trip Details</button>
           </div>
           <div>
-            <button className={styles.primaryButton}>Edit</button>
+            <button>Edit</button>
             <button className={styles.dangerButton} onClick={handleDeleteClick}>
               Delete
             </button>
@@ -67,6 +67,7 @@ const TripCard: React.FC<TripCardProps> = ({ key, trip, onDelete, onMarkComplete
         {showConfirmModal && (
           <ConfirmationModal
             message="Are you sure you want to delete this trip?"
+            confirmBtnText="Yes, delete"
             onConfirm={handleConfirmDelete}
             onCancel={handleCancelDelete}
           />
