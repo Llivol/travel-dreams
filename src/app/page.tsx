@@ -56,6 +56,14 @@ export default function Home() {
     );
   };
 
+  const handleEditSave = (updatedTrip: Trip) => {
+    setTrips((prevTrips) =>
+      prevTrips.map((trip) =>
+        trip.id === updatedTrip.id ? updatedTrip : trip
+      )
+    );
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -68,6 +76,7 @@ export default function Home() {
         searchTerm={searchTerm}
         onDelete={handleDelete}
         onMarkComplete={handleMarkComplete}
+        onEditSave={handleEditSave}
       />
     </>
   );
