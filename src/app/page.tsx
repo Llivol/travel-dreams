@@ -12,6 +12,8 @@ interface Trip {
   details: string;
   thumbnail: string;
   completed: boolean;
+  activities: string[];
+  status: string;
 }
 
 export default function Home() {
@@ -49,6 +51,14 @@ export default function Home() {
     }
   };
 
+  const handleMarkComplete = (id: number) => {
+    setTrips((prevTrips) =>
+      prevTrips.map((trip) =>
+        trip.id === id ? { ...trip, status: trip.status === "done" ? "todo" : "done" } : trip
+      )
+    );
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -56,7 +66,7 @@ export default function Home() {
     <>
       <Navbar />
       <TitleBlock onSearch={handleSearch} />
-      <TripList trips={trips} searchTerm={searchTerm} onDelete={handleDelete} />
+      <TripList trips={trips} searchTerm={searchTerm} onDelete={handleDelete} onMarkComplete={handleMarkComplete} />
     </>
   );
 }

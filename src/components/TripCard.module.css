@@ -51,7 +51,7 @@
 }
 
 .dangerButton {
-  color: #c93957;
+  color: var(--danger-color);
 }
 
 @media (max-width: 1440px) {

@@ -15,9 +15,10 @@ interface TripListProps {
   trips: Trip[];
   searchTerm: string;
   onDelete: (tripId: number) => void;
+  onMarkComplete: (tripId: number) => void;
 }
 
-const TripList: React.FC<TripListProps> = ({ trips, searchTerm, onDelete }) => {
+const TripList: React.FC<TripListProps> = ({ trips, searchTerm, onDelete, onMarkComplete }) => {
   const [filter, setFilter] = useState("All");
 
   const filteredTrips = trips.filter((trip) => {
@@ -67,7 +68,7 @@ const TripList: React.FC<TripListProps> = ({ trips, searchTerm, onDelete }) => {
       </div>
       <>
         {filteredTrips.map((trip) => (
-          <TripCard key={trip.id} trip={trip} onDelete={onDelete} />
+          <TripCard key={trip.id} trip={trip} onDelete={onDelete} onMarkComplete={onMarkComplete} />
         ))}
       </>
     </div>
