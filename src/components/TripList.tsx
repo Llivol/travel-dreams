@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import TripCard from "./TripCard";
 import styles from "./TripList.module.css";
-
-interface Trip {
-  id: number;
-  title: string;
-  description: string;
-  photo_url: string;
-  status: string;
-  itinerary: Array<{ day: string; activities: string[] }>;
-}
+import { Trip } from "../types/interfaces";
 
 interface TripListProps {
   trips: Trip[];

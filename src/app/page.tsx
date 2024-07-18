@@ -1,26 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchTrips, deleteTrip } from '../services/tripService';
+import { fetchTrips, deleteTrip } from "../services/tripService";
 import Navbar from "../components/Navbar";
 import TitleBlock from "../components/TitleBlock";
 import TripList from "../components/TripList";
-
-interface Trip {
-  id: number;
-  title: string;
-  details: string;
-  thumbnail: string;
-  completed: boolean;
-  activities: string[];
-  status: string;
-}
+import { Trip } from "../types/interfaces";
 
 export default function Home() {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  console.log(trips);
 
   useEffect(() => {
     const getTrips = async () => {
@@ -47,14 +40,16 @@ export default function Home() {
       const updatedTrips = trips.filter((trip) => trip.id !== tripId);
       setTrips(updatedTrips);
     } catch (error) {
-      console.error('Error deleting trip:', error);
+      console.error("Error deleting trip:", error);
     }
   };
 
   const handleMarkComplete = (id: number) => {
     setTrips((prevTrips) =>
       prevTrips.map((trip) =>
-        trip.id === id ? { ...trip, status: trip.status === "done" ? "todo" : "done" } : trip
+        trip.id === id
+          ? { ...trip, status: trip.status === "done" ? "todo" : "done" }
+          : trip
       )
     );
   };
@@ -66,7 +61,12 @@ export default function Home() {
     <>
       <Navbar />
       <TitleBlock onSearch={handleSearch} />
-      <TripList trips={trips} searchTerm={searchTerm} onDelete={handleDelete} onMarkComplete={handleMarkComplete} />
+      <TripList
+        trips={trips}
+        searchTerm={searchTerm}
+        onDelete={handleDelete}
+        onMarkComplete={handleMarkComplete}
+      />
     </>
   );
 }

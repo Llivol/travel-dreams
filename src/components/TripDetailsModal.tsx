@@ -1,24 +1,24 @@
 import React from "react";
 import styles from "./TripDetailsModal.module.css";
+import { Trip } from "../types/interfaces";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 interface TripDetailsModalProps {
-  trip: {
-    id: number;
-    title: string;
-    description: string;
-    photo_url: string;
-    status: string;
-    itinerary: Array<{ day: string; activities: string[] }>;
-  };
+  trip: Trip;
   onClose: () => void;
   onMarkComplete: (id: number) => void;
 }
 
-const TripDetailsModal: React.FC<TripDetailsModalProps> = ({ trip, onClose, onMarkComplete }) => {
+const TripDetailsModal: React.FC<TripDetailsModalProps> = ({
+  trip,
+  onClose,
+  onMarkComplete,
+}) => {
   React.useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, []);
 
@@ -26,31 +26,49 @@ const TripDetailsModal: React.FC<TripDetailsModalProps> = ({ trip, onClose, onMa
     <div className={styles.modalBackdrop}>
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>
-          &times;
+          <FontAwesomeIcon icon={faTimes} />
         </button>
         <img src={trip.photo_url} alt={trip.title} className={styles.image} />
-        <h2>{trip.title}</h2>
-        <label>
-          <input
-            type="checkbox"
-            checked={trip.status === "done"}
-            onChange={() => onMarkComplete(trip.id)}
-          />
-          Mark the trip as completed
-        </label>
-        <p>{trip.description}</p>
-        <hr className={styles.hr} />
-        <h2>Itinerary</h2>
-        <div className={styles.itinerary}>
-          {trip.itinerary.map((day, index) => (
-            <div key={index} className={styles.dayBlock}>
-              <div className={styles.dot} />
-              <div className={styles.dayContent}>
-                <h3>Day {index + 1}: {day.day}</h3>
-                <p>{day.activities.join(", ")}</p>
+        <div className={styles.modalBody}>
+          <div>
+            <h1>{trip.title}</h1>
+            <label className={styles.checkboxContainer}>
+              <input
+                type="checkbox"
+                checked={trip.status === "done"}
+                onChange={() => onMarkComplete(trip.id)}
+                className={styles.checkboxInput}
+              />
+              <span className={styles.customCheckbox}>
+                <FontAwesomeIcon icon={faCheck} className={styles.checkIcon} />
+              </span>
+              <span>
+                {trip.status === "done"
+                  ? "Complete"
+                  : "Mark the trip as completed"}
+              </span>
+            </label>
+          </div>
+          <p>{trip.description}</p>
+          {trip.itinerary.length > 0 && (
+            <>
+              <hr className={styles.hr} />
+              <h2>Itinerary</h2>
+              <div className={styles.itinerary}>
+                {trip.itinerary.map(({ day, location, description }) => (
+                  <div key={day} className={styles.dayBlock}>
+                    <div className={styles.dot} />
+                    <div className={styles.dayContent}>
+                      <h3>
+                        Day {day}: {location}
+                      </h3>
+                      <p>{description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          ))}
+            </>
+          )}
         </div>
       </div>
     </div>

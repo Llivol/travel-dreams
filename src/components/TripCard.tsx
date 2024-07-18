@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import styles from "./TripCard.module.css";
 import ConfirmationModal from "./ConfirmationModal";
 import TripDetailsModal from "./TripDetailsModal";
-
-interface Trip {
-  id: number;
-  title: string;
-  description: string;
-  photo_url: string;
-  status: string;
-  itinerary: Array<{ day: string; activities: string[] }>;
-}
+import { Trip } from "../types/interfaces";
 
 interface TripCardProps {
   key: number;
