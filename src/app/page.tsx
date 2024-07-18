@@ -13,8 +13,6 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  console.log("aruba > ", trips);
-
   useEffect(() => {
     const getTrips = async () => {
       try {
@@ -35,11 +33,9 @@ export default function Home() {
   };
 
   const handleDelete = async (tripId: number) => {
-    console.log("aruba > handle delete", tripId);
     try {
       await deleteTrip(tripId);
       const updatedTrips = trips.filter((trip) => trip.id !== tripId);
-      console.log("aruba > updatedTrips", updatedTrips);
       setTrips(updatedTrips);
     } catch (error) {
       console.error("Error deleting trip:", error);

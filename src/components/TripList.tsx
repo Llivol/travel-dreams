@@ -41,7 +41,6 @@ const TripList: React.FC<TripListProps> = ({
         return matchesFilter && matchesSearch;
       });
       setFilteredTrips(newFilteredTrips);
-      console.log("aruba > Updated filteredTrips", newFilteredTrips);
     };
 
     filterTrips();
@@ -50,9 +49,6 @@ const TripList: React.FC<TripListProps> = ({
   const handleFilterChange = (filterType: string) => {
     setFilter(filterType);
   };
-
-  console.log("aruba > Current filter:", filter);
-  console.log("aruba > Filtered trips to be rendered:", filteredTrips);
 
   return (
     <div className={styles.container}>
