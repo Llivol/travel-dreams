@@ -31,7 +31,7 @@ const TitleBlock: React.FC<TitleBlockProps> = ({ onSearch }) => {
           className={styles.input}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleKeyPress} // Handle Enter key press
+          onKeyPress={handleKeyPress}
         />
         <button className={styles.searchButton} onClick={handleSearchClick}>
           Search

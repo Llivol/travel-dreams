@@ -5,7 +5,7 @@ import TripDetailsModal from "./TripDetailsModal";
 import { Trip } from "../types/interfaces";
 
 interface TripCardProps {
-  key: number;
+  key: string;
   trip: Trip;
   onDelete: (tripId: number) => void;
   onMarkComplete: (tripId: number) => void;

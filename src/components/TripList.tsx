@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TripCard from "./TripCard";
 import styles from "./TripList.module.css";
 import { Trip } from "../types/interfaces";
@@ -10,25 +10,47 @@ interface TripListProps {
   onMarkComplete: (tripId: number) => void;
 }
 
-const TripList: React.FC<TripListProps> = ({ trips, searchTerm, onDelete, onMarkComplete }) => {
+const TripList: React.FC<TripListProps> = ({
+  trips,
+  searchTerm,
+  onDelete,
+  onMarkComplete,
+}) => {
   const [filter, setFilter] = useState("All");
+  const [filteredTrips, setFilteredTrips] = useState<Trip[]>([]);
 
-  const filteredTrips = trips.filter((trip) => {
-    const matchesFilter =
-      filter === "All" ||
-      (filter === "Upcoming" && trip.status === "todo") ||
-      (filter === "Completed" && trip.status === "done");
+  useEffect(() => {
+    const filterTrips = () => {
+      const newFilteredTrips = trips.filter((trip) => {
+        const matchesFilter =
+          filter === "All" ||
+          (filter === "Upcoming" && trip.status === "todo") ||
+          (filter === "Completed" && trip.status === "done");
 
-    const matchesSearch =
-      trip.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      trip.description.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesSearch =
+          trip.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          trip.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          trip.itinerary.some(
+            (day) =>
+              day.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              day.description.toLowerCase().includes(searchTerm.toLowerCase())
+          );
 
-    return matchesFilter && matchesSearch;
-  });
+        return matchesFilter && matchesSearch;
+      });
+      setFilteredTrips(newFilteredTrips);
+      console.log("aruba > Updated filteredTrips", newFilteredTrips);
+    };
+
+    filterTrips();
+  }, [trips, searchTerm, filter]);
 
   const handleFilterChange = (filterType: string) => {
     setFilter(filterType);
   };
+
+  console.log("aruba > Current filter:", filter);
+  console.log("aruba > Filtered trips to be rendered:", filteredTrips);
 
   return (
     <div className={styles.container}>
@@ -60,7 +82,12 @@ const TripList: React.FC<TripListProps> = ({ trips, searchTerm, onDelete, onMark
       </div>
       <>
         {filteredTrips.map((trip) => (
-          <TripCard key={trip.id} trip={trip} onDelete={onDelete} onMarkComplete={onMarkComplete} />
+          <TripCard
+            key={`${trip.title}-${trip.id}`}
+            trip={trip}
+            onDelete={onDelete}
+            onMarkComplete={onMarkComplete}
+          />
         ))}
       </>
     </div>
