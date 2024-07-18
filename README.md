@@ -23,11 +23,11 @@ We are thrilled to introduce you to our new adventure: Dream Travels! Here, we a
 - Don't know where to go? Want the destination to be chosen for you? Let's add this functionality:
   - Add a button that randomly selects one of the trips listed. When the trip is selected, the randomly chosen trip should be displayed with a countdown to prepare for the journey, which is dynamically calculated based on the current date and set to three months in the future. This information should be saved, so every time you access the website, you would see the time remaining until the trip starts. For example, if you select it today, the countdown will reflect the exact number of days until the trip starts, considering the variable lengths of the months. If you access the website tomorrow, the countdown will adjust accordingly.
   - You won't be able to randomly select another trip if you have already chosen one before.
-- Here we provide a linked Figma for you to have examples of the design you should use 🖌: [Design](#)
+- Here we provide a linked Figma for you to have examples of the design you should use 🖌: [Design](https://www.figma.com/design/arhp4iZhMsFxm6idFrqtPm/Trips-maker?node-id=0-1)
 
 ### Technical details 🖥
 - This is the endpoint against which you will have to make requests: [Dream Travels Endpoint](https://my-json-server.typicode.com/mariosanz92/dream-travels-data/travels)
-  - [Guide to use it](#)
+  - [Guide to use it](https://jsonplaceholder.typicode.com/guide/)
 - Tests are mandatory.
 - Using TypeScript is mandatory.
 - Using NextJS is optional.
